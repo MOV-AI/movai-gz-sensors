@@ -37,15 +37,52 @@ jobs:
           PACKAGE_NAME=${{ steps.vars.outputs.pkg_name }}
           sed -i "s/\(project($PACKAGE_NAME VERSION \)[0-9.]*\()\)/\1$NEW_VERSION\2/" CMakeLists.txt
 
-      - name: Compile, test, package and publish to nexus ppa-public
+      - name: Compile, test and package
         id: ci
         uses: ignition-tooling/action-ignition-ci@focal
         with:
           cpplint-enabled: true
           cmake-args: 'CMAKE_BUILD_TYPE=Release'
-          nexus-publisher-user: ${{ secrets.NEXUS_PUBLISHER_USR }}
-          nexus_publisher_password: ${{ secrets.NEXUS_PUBLISHER_PWD }}
 
+      - name: Archive debian artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: packages
+          path: artifacts/*
+          retention-days: 5
+
+      - name: Publish to Nexus
+        shell: bash
+        run: |
+          NEXUS_REPO="ppa-public"
+          NEXUS_ENDPOINT="artifacts.aws.cloud.mov.ai"
+
+          for file in artifacts/*.deb
+          do
+            RETURN_CODE=$(curl -u "${{ secrets.NEXUS_PUBLISHER_USR }}:${{ secrets.NEXUS_PUBLISHER_PWD }}" \
+            -H "Content-Type: multipart/form-data" \
+            --data-binary "@$file" \
+            -w '%{http_code}' \
+            "https://$NEXUS_ENDPOINT/repository/$NEXUS_REPO/")
+
+            #retry
+            if [[ ! "$RETURN_CODE" =~ ^(200|201|202)$ ]]; then
+              echo "Failed upload with $RETURN_CODE. Retrying"
+
+              RETURN_CODE=$(curl -u "${{ secrets.NEXUS_PUBLISHER_USR }}:${{ secrets.NEXUS_PUBLISHER_PWD }}" \
+                -H "Content-Type: multipart/form-data" \
+                --data-binary "@$file" \
+                -w '%{http_code}' \
+                "https://$NEXUS_ENDPOINT/repository/$NEXUS_REPO/")
+            fi
+
+            if [[ ! "$RETURN_CODE" =~ ^(200|201|202)$ ]]; then
+              echo "Failed upload with $RETURN_CODE. Exiting"
+              exit 1
+            fi
+
+          done
+      
       - name: Commit raise version
         run: |
           git config --global --add safe.directory $(pwd)

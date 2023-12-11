@@ -1,5 +1,6 @@
 # CMake folders
 build
+artifacts
 
 # OS generated files
 .DS_Store
@@ -7,3 +8,6 @@ build
 
 # Version control generated files
 *.orig
+
+# CI generated files
+detect_c*
