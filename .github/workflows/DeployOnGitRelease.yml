@@ -1,0 +1,58 @@
+name: "Deploy - To Nexus On Github Release"
+on:
+  release:
+    types: [released]
+    
+jobs:
+  focal-ci:
+    runs-on: ubuntu-latest
+    name: Ubuntu Focal CI
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Find Package details
+        id: vars
+        run: |
+          CMAKE_LISTS="CMakeLists.txt"
+          PACKAGE_NAME=$(grep -m 1 "project(" "$CMAKE_LISTS" | sed -n 's/project(\(.*\) VERSION \(.*\))/\1/p')
+          PACKAGE_VERSION=$(grep -m 1 "project(" "$CMAKE_LISTS" | sed -n 's/project(\(.*\) VERSION \(.*\))/\2/p')
+          echo "pkg_name=$PACKAGE_NAME" >> $GITHUB_OUTPUT
+          echo "pkg_version=$PACKAGE_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Raise Version
+        id: vars-after-raise
+        run: |
+          PACKAGE_VERSION=${{ steps.vars.outputs.pkg_version }}
+          main_version=${PACKAGE_VERSION%-*}
+          build_id="${PACKAGE_VERSION#*-}"
+          raised_buildid=$(($build_id+1))
+          RAISED_PACKAGE_VERSION="$main_version-$raised_buildid"
+          echo "pkg_version=$RAISED_PACKAGE_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Update Version
+        run: |
+          NEW_VERSION=${{ steps.vars-after-raise.outputs.pkg_version }}
+          PACKAGE_NAME=${{ steps.vars.outputs.pkg_name }}
+          sed -i "s/\(project($PACKAGE_NAME VERSION \)[0-9.]*\()\)/\1$NEW_VERSION\2/" CMakeLists.txt
+
+      - name: Compile, test, package and publish to nexus ppa-public
+        id: ci
+        uses: ignition-tooling/action-ignition-ci@focal
+        with:
+          cpplint-enabled: true
+          cmake-args: 'CMAKE_BUILD_TYPE=Release'
+          nexus-publisher-user: ${{ secrets.NEXUS_PUBLISHER_USR }}
+          nexus_publisher_password: ${{ secrets.NEXUS_PUBLISHER_PWD }}
+
+      - name: Commit raise version
+        run: |
+          git config --global --add safe.directory $(pwd)
+          git config --global user.name '${{ secrets.RAISE_BOT_COMMIT_USER }}'
+          git config --global user.email '${{ secrets.RAISE_BOT_COMMIT_MAIL }}'
+          git pull
+          git add CMakeLists.txt
+          git commit -m "[skip actions] Automatic Bump of build version"
+          git push
+          commit_hash=$(git log --format="%H" -n 1)
+          echo "commit_id=$commit_hash" >> $GITHUB_OUTPUT
