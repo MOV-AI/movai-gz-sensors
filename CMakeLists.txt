@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.10.2 FATAL_ERROR)
 #============================================================================
 # Initialize the project
 #============================================================================
-project(movai-ignition-sensors6 VERSION 6.7.1-1)
+project(movai-ignition-sensors6 VERSION 6.7.1)
 
 #============================================================================
 # Find ignition-cmake
