@@ -1,12 +1,5 @@
 cmake_minimum_required(VERSION 3.10.2 FATAL_ERROR)
 
-# Set the package name
-set(CPACK_PACKAGE_NAME "movai-ignition-sensors6")
-set(CPACK_GENERATOR "DEB")
-
-# Include CPack to enable packaging
-include(CPack)
-
 #============================================================================
 # Initialize the project
 #============================================================================
