@@ -1,7 +1,6 @@
 # Package 
-mkdir artifacts
-cd artifacts && make package
-cd ..
+make package
+mkdir artifacts && mv *.deb artifacts/
 
 # Deploy to nexus
 NEXUS_REPO="ppa-public"
