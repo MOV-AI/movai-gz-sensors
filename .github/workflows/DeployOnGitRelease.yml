@@ -1,7 +1,8 @@
 name: "Deploy - To Nexus On Github Release"
 on:
-  release:
-    types: [released]
+  push:
+  # release:
+  #   types: [released]
     
 jobs:
   focal-ci:
@@ -54,7 +55,7 @@ jobs:
       - name: Publish to Nexus
         shell: bash
         run: |
-          NEXUS_REPO="ppa-public"
+          NEXUS_REPO="ppa-dev"
           NEXUS_ENDPOINT="artifacts.aws.cloud.mov.ai"
 
           for file in artifacts/*.deb
