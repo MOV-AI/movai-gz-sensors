@@ -2,6 +2,7 @@ name: "Deploy - On branch main/release Push"
 on:
   push:
     branches:
+      - feature/dp-1360-add-deploy-workflow
       - main
       - 'releases/**'
 
