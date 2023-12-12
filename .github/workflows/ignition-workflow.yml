@@ -141,7 +141,6 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: CMakeLists
-        path: CMakeLists.txt
 
     - name: Commit raise version
       id: raise
