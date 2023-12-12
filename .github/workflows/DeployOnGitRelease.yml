@@ -25,9 +25,8 @@ jobs:
         id: vars-after-raise
         run: |
           PACKAGE_VERSION=${{ steps.vars.outputs.pkg_version }}
-          IFS='.' read -ra version_parts <<< "$PACKAGE_VERSION"
-          main_version="${version_parts[:-1]}"
-          patch_version="${version_parts[-1]}"
+          IFS='.' read major_version minor_version patch_version <<< "$PACKAGE_VERSION"
+          main_version="$major_version.$minor_version"
           raised_patchversion=$(($patch_version+1))
           RAISED_PACKAGE_VERSION="$main_version.$raised_patchversion"
           echo "pkg_version=$RAISED_PACKAGE_VERSION" >> $GITHUB_OUTPUT
