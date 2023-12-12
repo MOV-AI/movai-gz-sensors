@@ -65,6 +65,13 @@ jobs:
       with:
         cpplint-enabled: true
 
+    - name: Archive CMakeLists
+      uses: actions/upload-artifact@v3
+      with:
+        name: CMakeLists
+        path: CMakeLists.txt
+        retention-days: 1
+
     - name: Archive debian artifact
       uses: actions/upload-artifact@v3
       with:
@@ -125,12 +132,16 @@ jobs:
             fi
 
           done
-    
-    - name: Update Version
+
+    - name: Remove CMakeLists
       run: |
-        NEW_VERSION=${{ steps.vars-after-raise.outputs.pkg_version }}
-        PACKAGE_NAME=${{ steps.vars.outputs.pkg_name }}
-        sed -i "s/\(project($PACKAGE_NAME VERSION \)[0-9.]*\()\)/\1$NEW_VERSION\2/" CMakeLists.txt
+        rm CMakeLists.txt
+
+    - name: Download new CMakeLists
+      uses: actions/download-artifact@v3
+      with:
+        name: CMakeLists
+        path: CMakeLists.txt
 
     - name: Commit raise version
       id: raise
