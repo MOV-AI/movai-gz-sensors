@@ -6,4 +6,4 @@ libignition-rendering6-dev
 libignition-tools-dev
 libignition-transport11-dev
 libsdformat12-dev
-xvfb
+xvfb 
