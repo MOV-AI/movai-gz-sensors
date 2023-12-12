@@ -6,7 +6,7 @@ on:
       - main
       - 'releases/**'
     paths-ignore:
-      - '**/changelog'
+      - 'CMakeLists.txt'
 
 jobs:
   CI:

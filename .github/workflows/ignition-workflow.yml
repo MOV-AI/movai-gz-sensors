@@ -125,6 +125,12 @@ jobs:
             fi
 
           done
+    
+    - name: Update Version
+      run: |
+        NEW_VERSION=${{ steps.vars-after-raise.outputs.pkg_version }}
+        PACKAGE_NAME=${{ steps.vars.outputs.pkg_name }}
+        sed -i "s/\(project($PACKAGE_NAME VERSION \)[0-9.]*\()\)/\1$NEW_VERSION\2/" CMakeLists.txt
 
     - name: Commit raise version
       id: raise

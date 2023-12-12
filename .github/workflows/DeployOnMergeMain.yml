@@ -7,7 +7,7 @@ on:
       - 'releases/**'
 
     paths-ignore:
-      - '**/changelog'
+      - 'CMakeLists.txt'
 
 jobs:
   Deploy:
