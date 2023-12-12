@@ -43,7 +43,6 @@ jobs:
         uses: ignition-tooling/action-ignition-ci@focal
         with:
           cpplint-enabled: true
-          cmake-args: 'CMAKE_BUILD_TYPE=Release'
 
       - name: Archive debian artifact
         uses: actions/upload-artifact@v3
