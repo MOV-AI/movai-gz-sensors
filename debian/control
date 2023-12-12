@@ -1,0 +1,11 @@
+Source: movai-ignition-sensors6
+Maintainer: Mariana Alves<mariana.alves@mov.ai>
+Section: unknown
+Priority: optional
+Build-Depends: 
+Standards-Version: 3.9.1
+
+Package: movai-ignition-sensors6
+Architecture: all
+Depends: ${misc:Depends}
+Description: Generate fake intensities
