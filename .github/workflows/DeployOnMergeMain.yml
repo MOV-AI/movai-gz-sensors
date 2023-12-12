@@ -1,13 +1,18 @@
-name: "Deploy - To Nexus On Github Release"
+name: "Deploy - On branch main/release Push"
 on:
-  release:
-    types: [released]
+  push:
+    branches:
+      - main
+      - 'releases/**'
+
+    paths-ignore:
+      - '**/changelog'
 
 jobs:
-  Release-Ros-Component:
+  Deploy:
     uses: MOV-AI/movai-gz-sensors/.github/workflows/ignition-workflow.yml@feature/dp-1360-add-deploy-workflow
     with:
-      release: 'true'
+      deploy: 'true'
     secrets:
       auto_commit_user: ${{ secrets.RAISE_BOT_COMMIT_USER }}
       auto_commit_mail: ${{ secrets.RAISE_BOT_COMMIT_MAIL }}

@@ -8,6 +8,7 @@ jobs:
   assign:
     name: Add ticket to inbox
     runs-on: ubuntu-latest
+    if: false
     steps:
       - name: Add ticket to inbox
         uses: actions/add-to-project@v0.5.0
