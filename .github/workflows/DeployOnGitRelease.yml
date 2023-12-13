@@ -5,9 +5,10 @@ on:
 
 jobs:
   Deploy:
-    uses: MOV-AI/.github/.github/workflows/cpp-workflow.yml@v2
+    uses: MOV-AI/.github/.github/workflows/cpp-workflow.yml@feature/dp-1360-add-argument-publishing-repo-to-cpp-workflow
     with:
       release: 'true'
+      prod_publish_repos: '["ppa-public"]'
     secrets:
       auto_commit_user: ${{ secrets.RAISE_BOT_COMMIT_USER }}
       auto_commit_mail: ${{ secrets.RAISE_BOT_COMMIT_MAIL }}

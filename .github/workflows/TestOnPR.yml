@@ -5,6 +5,8 @@ on:
       - dev
       - main
       - 'releases/**'
+      - 'ign-sensors6'
+      
     paths-ignore:
       - '**/changelog'
 
