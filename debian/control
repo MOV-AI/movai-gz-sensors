@@ -7,5 +7,5 @@ Standards-Version: 3.9.1
 
 Package: movai-ignition-sensors6
 Architecture: all
-Depends: ${misc:Depends}
+Depends: libc6 (>= 2.29), libgcc-s1 (>= 3.0), libignition-common4 (>= 4.7.0), libignition-math6 (>= 6.14.0), libignition-msgs8 (>= 8.7.0), libignition-transport11 (>= 11.4.1), libprotobuf17, libsdformat12 (>= 12.7.1), libstdc++6 (>= 5.2)
 Description: Provides a set of sensors models that can be configured at run time to mimic specific real-world sensors. 

@@ -1,5 +1,18 @@
 # Gazebo Sensors : Sensor models for simulation
 
+This repository is a fork of the official ignition gz-sensors repository.
+
+It is used to generate intermediary versions of the ignition-sensors6 package, which can be installed in the version 2.4.0-53 of the tugbot-ign-sim container with the following commands:
+
+```
+pks=$(apt list --installed libignition-sensors6* 2>/dev/null | awk -F'[/ ]' '{print $1}' | grep lib) && \
+for pk in $pks; do dpkg -r --force-depends --ignore-depends=libignition-gazebo6-plugins,libignition-gazebo6-dev,ignition-fortress $pk; done
+apt download movai-ignition-sensors6=2.7.1-2 && \
+dpkg -i *.deb
+```
+
+---------
+
 **Maintainer:** ichen AT openrobotics DOT org
 
 [![GitHub open issues](https://img.shields.io/github/issues-raw/gazebosim/gz-sensors.svg)](https://github.com/gazebosim/gz-sensors/issues)
