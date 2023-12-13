@@ -5,7 +5,7 @@ on:
 
 jobs:
   Deploy:
-    uses: MOV-AI/.github/.github/workflows/cpp-workflow.yml@feature/dp-1360-add-argument-publishing-repo-to-cpp-workflow
+    uses: MOV-AI/.github/.github/workflows/cpp-workflow.yml@v2
     with:
       release: 'true'
       prod_publish_repos: '["ppa-public"]'
