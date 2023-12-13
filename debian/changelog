@@ -1,1 +1,3 @@
-movai-ignition-sensors6 (2.7.1-1) UNRELEASED; urgency=medium
+movai-ignition-sensors6 (2.7.1-2) UNRELEASED; urgency=medium  * bump version
+
+ -- root <root@a5c0e46a49dc>  Wed, 13 Dec 2023 13:06:11 +0000
