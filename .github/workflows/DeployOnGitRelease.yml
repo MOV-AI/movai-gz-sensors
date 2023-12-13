@@ -4,14 +4,17 @@ on:
     types: [released]
 
 jobs:
-  Release-Ros-Component:
-    uses: MOV-AI/movai-gz-sensors/.github/workflows/ignition-workflow.yml@feature/dp-1360-add-deploy-workflow
+  Deploy:
+    uses: MOV-AI/.github/.github/workflows/cpp-workflow.yml@v2
     with:
       release: 'true'
     secrets:
       auto_commit_user: ${{ secrets.RAISE_BOT_COMMIT_USER }}
       auto_commit_mail: ${{ secrets.RAISE_BOT_COMMIT_MAIL }}
       auto_commit_pwd: ${{ secrets.RAISE_BOT_COMMIT_PASSWORD }}
+      registry_user: ${{ secrets.PORTUS_APP_USER }}
+      registry_password: ${{ secrets.PORTUS_APP_TOKEN }}
       nexus_publisher_user: ${{ secrets.NEXUS_PUBLISHER_USR }}
       nexus_publisher_password: ${{ secrets.NEXUS_PUBLISHER_PWD }}
       gh_token: ${{ secrets.GITHUB_TOKEN }}
+      sonar_token: ${{ secrets.SONAR_TOKEN }}

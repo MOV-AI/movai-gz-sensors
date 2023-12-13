@@ -9,7 +9,9 @@
 
 # see ENVIRONMENT in dpkg-buildflags(1)
 # package maintainers to append CFLAGS
-#export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
+export DEB_CFLAGS_SET=-DDEBUG=0 -O3
+export DEB_CPPFLAGS_SET=-DDEBUG=0 -O3
+export DEB_CXXFLAGS_SET=-DDEBUG=0 -O3
 # package maintainers to append LDFLAGS
 #export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
 
@@ -22,6 +24,6 @@
 #override_dh_auto_configure:
 #	dh_auto_configure -- #	-DCMAKE_LIBRARY_PATH=$(DEB_HOST_MULTIARCH)
 override_dh_auto_configure:
-	dh_auto_configure -- -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=/usr/lib/x86_64-linux-gnu/
+	dh_auto_configure -- -DCMAKE_BUILD_TYPE="Release" -DCMAKE_PREFIX_PATH="/usr/lib/x86_64-linux-gnu/"
 
 override_dh_auto_test:
