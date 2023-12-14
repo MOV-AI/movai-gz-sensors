@@ -6,6 +6,16 @@ It is used to generate intermediary versions of the ignition-sensors6 package wi
 
 To achieve this goal, three pipelines were developped for building, packaging and releasing gz-sensors packages.
 
+# Build
+
+```
+curl -fsSL http://packages.osrfoundation.org/gazebo.key | sudo apt-key add - ;sudo add-apt-repository "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main"
+sudo apt install $(cat requirements.apt)
+mkdir build
+cd build
+cmake ..
+```
+
 ---------
 
 **Maintainer:** ichen AT openrobotics DOT org
