@@ -3,7 +3,8 @@ on:
   push:
     branches:
       - main
-      - 'ign-sensors6'
+      - 'ign-sensors*'
+      - 'gz-sensors*'
 
     paths-ignore:
       - '**/changelog'

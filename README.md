@@ -2,14 +2,9 @@
 
 This repository is a fork of the official ignition gz-sensors repository.
 
-It is used to generate intermediary versions of the ignition-sensors6 package, which can be installed in the version 2.4.0-53 of the tugbot-ign-sim container with the following commands:
+It is used to generate intermediary versions of the ignition-sensors6 package with an alias name, in order to not interfere with the official release of new versions of the packages, while allowing the packaging of more recent versions.
 
-```
-pks=$(apt list --installed libignition-sensors6* 2>/dev/null | awk -F'[/ ]' '{print $1}' | grep lib) && \
-for pk in $pks; do dpkg -r --force-depends --ignore-depends=libignition-gazebo6-plugins,libignition-gazebo6-dev,ignition-fortress $pk; done
-apt download movai-ignition-sensors6=2.7.1-2 && \
-dpkg -i *.deb
-```
+To achieve this goal, three pipelines were developped for building, packaging and releasing gz-sensors packages.
 
 ---------
 
