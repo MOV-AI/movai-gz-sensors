@@ -14,6 +14,7 @@ sudo apt install $(cat requirements.apt)
 mkdir build
 cd build
 cmake ..
+make
 ```
 
 ---------
