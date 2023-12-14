@@ -1,0 +1,10 @@
+libignition-cmake2-dev=2.17.1-1~focal
+libignition-common4-dev=4.7.0-1~focal
+libignition-math6-dev=6.15.0-1~focal
+libignition-msgs8-dev=8.7.0-1~focal
+libignition-rendering6-dev=6.6.2-1~focal
+libignition-tools-dev=1.5.0-1~focal
+libignition-transport11-dev=11.4.1-1~focal
+libsdformat12-dev=12.7.2-1~focal
+xvfb=2:1.20.13-1ubuntu1~20.04.12
+libgl1-mesa-dev=21.2.6-0ubuntu0.1~20.04.2

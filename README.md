@@ -1,5 +1,23 @@
 # Gazebo Sensors : Sensor models for simulation
 
+This repository is a fork of the official ignition gz-sensors repository.
+
+It is used to generate intermediary versions of the ignition-sensors6 package with an alias name, in order to not interfere with the official release of new versions of the packages, while allowing the packaging of more recent versions.
+
+To achieve this goal, three pipelines were developped for building, packaging and releasing gz-sensors packages.
+
+# Build
+
+```
+curl -fsSL http://packages.osrfoundation.org/gazebo.key | sudo apt-key add - ;sudo add-apt-repository "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main"
+sudo apt install $(cat requirements.apt)
+mkdir build
+cd build
+cmake ..
+```
+
+---------
+
 **Maintainer:** ichen AT openrobotics DOT org
 
 [![GitHub open issues](https://img.shields.io/github/issues-raw/gazebosim/gz-sensors.svg)](https://github.com/gazebosim/gz-sensors/issues)

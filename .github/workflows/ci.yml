@@ -12,6 +12,7 @@ jobs:
   bionic-ci:
     runs-on: ubuntu-latest
     name: Ubuntu Bionic CI
+    if: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -23,6 +24,7 @@ jobs:
   focal-ci:
     runs-on: ubuntu-latest
     name: Ubuntu Focal CI
+    if: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -34,6 +36,7 @@ jobs:
   jammy-ci:
     runs-on: ubuntu-latest
     name: Ubuntu Jammy CI
+    if: false
     steps:
       - name: Checkout
         uses: actions/checkout@v3

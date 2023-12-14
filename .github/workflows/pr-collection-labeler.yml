@@ -5,6 +5,7 @@ on: pull_request_target
 jobs:
   pr_collection_labeler:
     runs-on: ubuntu-latest
+    if: false
     steps:
     - name: Add collection labels
       if: github.event.action == 'opened'
